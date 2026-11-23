@@ -1,0 +1,399 @@
+<!-- ============================================================
+     FILE: index.html
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TranspoGo — Transportation System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ========== LOGIN PAGE ========== -->
+  <section id="loginPage" class="login-page">
+    <div class="login-bg">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="login-card">
+      <div class="login-icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 17h16"/>
+          <path d="M6 17V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8"/>
+          <path d="M6 13h12"/>
+          <circle cx="8" cy="17" r="1.6"/>
+          <circle cx="16" cy="17" r="1.6"/>
+          <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+        </svg>
+      </div>
+      <h1>TranspoGo</h1>
+      <p class="subtitle">Public Transportation Route Information System</p>
+
+      <form id="loginForm" autocomplete="off">
+        <div class="input-group">
+          <input type="text" id="username" placeholder=" " required>
+          <label for="username">Username</label>
+          <span class="field-icon">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21a8 8 0 0 1 16 0"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="password" placeholder=" " required>
+          <label for="password">Password</label>
+          <span class="field-icon">
+            <svg class="icon" viewBox="0 0 24 24">
+              <rect x="4" y="11" width="16" height="10" rx="2"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+            </svg>
+          </span>
+        </div>
+
+        <p id="loginError" class="error-message"></p>
+
+        <button type="submit" class="primary-btn">
+          <svg class="icon icon-sm" viewBox="0 0 24 24">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Sign In
+        </button>
+      </form>
+
+      <div class="demo-accounts">
+        <div class="demo-title">
+          <svg class="icon icon-sm" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4"/>
+            <path d="M12 8h.01"/>
+          </svg>
+          Demo Accounts
+        </div>
+        <div class="cred-row">
+          <span class="role-tag admin">Admin</span>
+          <code>admin</code>
+          <span class="sep">/</span>
+          <code>admin123</code>
+        </div>
+        <div class="cred-row">
+          <span class="role-tag">Passenger</span>
+          <code>user</code>
+          <span class="sep">/</span>
+          <code>user123</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAIN APPLICATION ========== -->
+  <section id="appPage" class="app-page hidden">
+
+    <header class="topbar">
+      <div class="brand">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M4 17h16"/>
+          <path d="M6 17V9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8"/>
+          <path d="M6 13h12"/>
+          <circle cx="8" cy="17" r="1.6"/>
+          <circle cx="16" cy="17" r="1.6"/>
+        </svg>
+        Transpo<span>Go</span>
+      </div>
+      <div class="user-area">
+        <div class="user-badge">
+          <span class="dot"></span>
+          <span id="welcomeUser">Welcome</span>
+        </div>
+        <button id="logoutBtn" class="logout-btn">
+          <svg class="icon icon-sm" viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <button class="nav-btn active" data-page="dashboard">
+          <svg class="icon" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+            <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+            <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+            <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </button>
+        <button class="nav-btn" data-page="routes">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="6" cy="19" r="2"/>
+            <circle cx="18" cy="5" r="2"/>
+            <path d="M8 19h6a4 4 0 0 0 4-4V9"/>
+            <path d="M16 5H9a4 4 0 0 0-4 4v3"/>
+          </svg>
+          <span class="nav-label">Find Routes</span>
+        </button>
+        <button class="nav-btn" data-page="fare">
+          <svg class="icon" viewBox="0 0 24 24">
+            <rect x="2" y="6" width="20" height="12" rx="2"/>
+            <circle cx="12" cy="12" r="2.5"/>
+            <path d="M6 12h.01"/>
+            <path d="M18 12h.01"/>
+          </svg>
+          <span class="nav-label">Fare Calculator</span>
+        </button>
+        <button class="nav-btn admin-only hidden" data-page="manage">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span class="nav-label">Manage Routes</span>
+        </button>
+      </aside>
+
+      <!-- CONTENT -->
+      <main class="content">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="content-page">
+          <h2>
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+              <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+              <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+            </svg>
+            Dashboard
+          </h2>
+          <p class="page-description">Overview of your transportation information system.</p>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Available Routes</span>
+                <svg class="icon" viewBox="0 0 24 24">
+                  <circle cx="6" cy="19" r="2"/>
+                  <circle cx="18" cy="5" r="2"/>
+                  <path d="M8 19h6a4 4 0 0 0 4-4V9"/>
+                </svg>
+              </div>
+              <h3 id="totalRoutes">0</h3>
+              <p>Routes in the system</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Route Search</span>
+                <svg class="icon" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+                </svg>
+              </div>
+              <h3>Smart</h3>
+              <p>Find any route</p>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top">
+                <span class="stat-label">Fare Estimate</span>
+                <svg class="icon" viewBox="0 0 24 24">
+                  <rect x="2" y="6" width="20" height="12" rx="2"/>
+                  <circle cx="12" cy="12" r="2.5"/>
+                </svg>
+              </div>
+              <h3>Instant</h3>
+              <p>Estimate your fare</p>
+            </div>
+          </div>
+
+          <div class="welcome-card">
+            <h3>Plan Your Journey</h3>
+            <p>Search routes, estimate fares, and plan your trip across the Philippines.</p>
+            <button class="primary-btn" data-go="routes">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+              </svg>
+              Find a Route
+            </button>
+          </div>
+        </section>
+
+        <!-- ROUTE FINDER -->
+        <section id="routes" class="content-page hidden">
+          <h2>
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <circle cx="6" cy="19" r="2"/>
+              <circle cx="18" cy="5" r="2"/>
+              <path d="M8 19h6a4 4 0 0 0 4-4V9"/>
+              <path d="M16 5H9a4 4 0 0 0-4 4v3"/>
+            </svg>
+            Find Transportation Routes
+          </h2>
+          <p class="page-description">Enter your starting point and destination to find available routes.</p>
+
+          <div class="search-card">
+            <div class="field">
+              <label for="origin">From</label>
+              <input id="origin" type="text" placeholder="e.g. Tuguegarao" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="destination">To</label>
+              <input id="destination" type="text" placeholder="e.g. Baguio" autocomplete="off">
+            </div>
+
+            <button id="searchRouteBtn" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+              </svg>
+              Find Route
+            </button>
+          </div>
+
+          <p class="search-hint">
+            <svg class="icon icon-sm" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4"/>
+              <path d="M12 8h.01"/>
+            </svg>
+            Works for any Philippine location. Try "Manila to Batanes", "Cebu to Davao", or "Tuguegarao to Sagada".
+          </p>
+
+          <div id="routeResults" class="results">
+            <div class="empty-message">
+              <svg class="icon icon-lg" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+              </svg>
+              <span>Enter a starting point and destination, then click "Find Route".</span>
+            </div>
+          </div>
+          <button id="cancelSearchBtn" class="cancel-search-btn hidden">
+            <svg class="icon icon-sm" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+            Cancel Search
+          </button>
+        </section>
+
+        <!-- FARE CALCULATOR -->
+        <section id="fare" class="content-page hidden">
+          <h2>
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="12" cy="12" r="2.5"/>
+              <path d="M6 12h.01"/>
+              <path d="M18 12h.01"/>
+            </svg>
+            Fare Calculator
+          </h2>
+          <p class="page-description">Enter two locations to estimate the fare, travel time, and transport options.</p>
+
+          <div class="calculator-card">
+            <label for="fareOrigin">From</label>
+            <input id="fareOrigin" type="text" placeholder="e.g. Tuguegarao" autocomplete="off">
+
+            <label for="fareDestination">To</label>
+            <input id="fareDestination" type="text" placeholder="e.g. Aparri" autocomplete="off">
+
+            <button id="calculateFareBtn" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <rect x="2" y="6" width="20" height="12" rx="2"/>
+                <circle cx="12" cy="12" r="2.5"/>
+              </svg>
+              Calculate Fare
+            </button>
+
+            <div id="fareResult" class="fare-result-box">
+              <div class="empty-message">
+                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                  <rect x="2" y="6" width="20" height="12" rx="2"/>
+                  <circle cx="12" cy="12" r="2.5"/>
+                </svg>
+                <span>Enter two locations and click "Calculate Fare".</span>
+              </div>
+            </div>
+            <button id="cancelFareBtn" class="cancel-search-btn hidden">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Cancel Calculation
+            </button>
+            <p class="search-hint">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4"/>
+                <path d="M12 8h.01"/>
+              </svg>
+              Estimated fare only. Actual fares may vary by transport operator and route.
+            </p>
+          </div>
+        </section>
+
+        <!-- ADMIN ROUTE MANAGEMENT -->
+        <section id="manage" class="content-page hidden">
+          <h2>
+            <svg class="icon icon-lg" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Manage Transportation Routes
+          </h2>
+          <p class="page-description">Add or remove routes from the local database.</p>
+
+          <div class="manage-card">
+            <h3>Add New Route</h3>
+
+            <label for="newOrigin">Starting Point</label>
+            <input id="newOrigin" type="text" placeholder="Starting point" autocomplete="off">
+
+            <label for="newDestination">Destination</label>
+            <input id="newDestination" type="text" placeholder="Destination" autocomplete="off">
+
+            <label for="newVehicle">Vehicle Type</label>
+            <select id="newVehicle">
+              <option value="Jeepney">Jeepney</option>
+              <option value="Bus">Bus</option>
+              <option value="Tricycle">Tricycle</option>
+              <option value="UV Express">UV Express</option>
+            </select>
+
+            <label for="newFare">Estimated Fare (₱)</label>
+            <input id="newFare" type="number" min="1" step="0.01" placeholder="Enter fare">
+
+            <button id="addRouteBtn" class="primary-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add Route
+            </button>
+            <p id="manageMessage" class="message"></p>
+          </div>
+
+          <h3 class="table-heading">Current Routes</h3>
+          <div id="adminRouteList"></div>
+        </section>
+
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 TranspoGo &mdash; Public Transportation Route Information System</p>
+    </footer>
+  </section>
+
+</body>
+</html>
